@@ -7,8 +7,14 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsgo && vitest build",
-    "test": "vitest"
+    "build": "vite build",
+    "format": "oxfmt",
+    "format:check": "oxfmt --check",
+    "lint": "oxlint",
+    "lint:fix": "oxlint --fix",
+    "typecheck": "tsgo --noEmit",
+    "test": "vitest",
+    "test:once": "vitest run"
   },
   "devDependencies": {
     "@types/node": "^25.9.2",
