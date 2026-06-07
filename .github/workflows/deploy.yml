@@ -29,10 +29,12 @@ jobs:
         run: npm run lint
       - name: Typecheck
         run: npm run typecheck
+      - name: Unit Tests
+        run: npm run test:unit:once
       - name: Install Playwright (chromium)
         run: npx playwright install --with-deps chromium
-      - name: Test
-        run: npm run test:once
+      - name: Browser Tests
+        run: npm run test:browser:once
       - name: Build
         run: npm run build -- --base="/${GITHUB_REPOSITORY#*/}/"
       - name: Upload Pages artifact

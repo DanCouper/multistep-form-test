@@ -8,17 +8,29 @@ export default defineConfig({
     port: 3000,
   },
   test: {
-    include: ["e2e/**/*.ts", "src/**/*.test.ts"],
-    browser: {
-      enabled: true,
-      headless: true,
-      testerHtmlPath: "index.html",
-      provider: playwright({
-        launchOptions: {
-          channel: "chromium",
+    projects: [
+      {
+        extends: true,
+        test: {
+          name: "e2e",
+          include: ["e2e/**/*.ts"],
+          browser: {
+            enabled: true,
+            headless: true,
+            testerHtmlPath: "index.html",
+            provider: playwright({ launchOptions: { channel: "chromium" } }),
+            instances: [{ browser: "chromium" }],
+          },
         },
-      }),
-      instances: [{ browser: "chromium" }],
-    },
+      },
+      {
+        extends: true,
+        test: {
+          name: "unit",
+          environment: "happy-dom",
+          include: ["src/**/*.test.ts"],
+        },
+      },
+    ],
   },
 });

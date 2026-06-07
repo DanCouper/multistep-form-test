@@ -13,8 +13,10 @@
     "lint": "oxlint",
     "lint:fix": "oxlint --fix",
     "typecheck": "tsgo --noEmit",
-    "test": "vitest",
-    "test:once": "vitest run"
+    "test:unit": "vitest --project unit",
+    "test:unit:once": "vitest run --project unit",
+    "test:browser": "vitest --project e2e",
+    "test:browser:once": "vitest run --project e2e"
   },
   "devDependencies": {
     "@types/node": "^25.9.2",

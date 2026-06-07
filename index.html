@@ -7,6 +7,111 @@
     <script src="./src/main.ts" type="module"></script>
   </head>
   <body>
-    <h1>Aalreet</h1>
+    <header role="banner">
+      <a href="/">
+        <svg role="img" viewBox="0 0 264 64">
+          <title>Your Site Design</title>
+          <rect width="264" height="64" fill="currentColor" />
+        </svg>
+      </a>
+      <nav>
+        <button type="button">Log in</button>
+      </nav>
+    </header>
+
+    <main>
+      <header>
+        <h1>Get a project quote</h1>
+        <p>Please enter your details below to get a quote for your project</p>
+      </header>
+
+      <form>
+        <fieldset>
+          <legend>Contact details</legend>
+          <p>Please enter your details below.</p>
+
+          <div>
+            <label for="contact-name">Name</label>
+            <input type="text" id="contact-name" name="name" autocomplete="name" />
+          </div>
+          <div>
+            <label for="contact-email">Email</label>
+            <input type="email" id="contact-email" name="email" autocomplete="email" />
+          </div>
+          <div>
+            <label for="contact-phone">Phone</label>
+            <input type="tel" id="contact-phone" name="phone" autocomplete="tel" />
+          </div>
+          <div>
+            <label for="contact-company">Company</label>
+            <input type="text" id="contact-company" name="company" autocomplete="organization" />
+          </div>
+
+          <footer>
+            <button type="button" hidden>Previous</button>
+            <button type="button">Next</button>
+          </footer>
+        </fieldset>
+
+        <fieldset>
+          <legend>Complete your quote</legend>
+          <p>Please check your details below and submit your quote.</p>
+
+          <dl>
+            <div>
+              <dt>Name</dt>
+              <dd><output for="confirm-name">-</output></dd>
+            </div>
+            <div>
+              <dt>Email</dt>
+              <dd><output for="confirm-email">-</output></dd>
+            </div>
+            <div>
+              <dt>Phone</dt>
+              <dd><output for="confirm-phone">-</output></dd>
+            </div>
+            <div>
+              <dt>Company</dt>
+              <dd><output for="confirm-company"></output></dd>
+            </div>
+          </dl>
+
+          <div>
+            <label for="confirm-details"
+              >I confirm that the above details are both up to date and correct</label
+            >
+            <input type="checkbox" id="confirm-details" name="confirm-details" />
+          </div>
+
+          <footer>
+            <button type="button">Previous</button>
+            <button type="submit">Submit</button>
+          </footer>
+        </fieldset>
+      </form>
+    </main>
+
+    <footer>
+      <div>
+        <a href="/">
+          <svg viewBox="0 0 264 64">
+            <title>Your Site Design</title>
+            <rect width="264" height="64" fill="currentColor" />
+          </svg>
+        </a>
+        <p>&copy; Your Company 2026</p>
+      </div>
+      <form aria-label="Newsletter signup">
+        <label for="newsletter-email" class="visually-hidden">Email</label>
+        <input
+          type="email"
+          id="newsletter-email"
+          name="email"
+          placeholder="Enter your email"
+          autocomplete="email"
+        />
+        <button type="submit">Subscribe</button>
+      </form>
+    </footer>
   </body>
 </html>
