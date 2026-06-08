@@ -1,0 +1,35 @@
+:where(#root) {
+  /* Create a root stacking context */
+  isolation: isolate;
+  /*
+     * Ensure the root element (which houses the application) is at least the 
+     * height of the viewport. This is conistently important.
+     */
+  min-height: 100dvh;
+
+  /*
+     * The app is always going to have a set of landmark elements stacked within the
+     * root element, and the `<main>` element should always expand to fill the available space.
+     */
+  display: flex;
+  flex-direction: column;
+
+  > main {
+    flex: 1;
+  }
+}
+
+/*
+ * REVIEW: make visible when tabbing so keyboard user can see when tabbing.
+ * However, this is going to mess some things up layout-wise so need to refine.
+ */
+.visually-hidden:not(:focus):not(:active) {
+  border: 0;
+  clip-path: inset(50%);
+  height: 1px;
+  margin: 0;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+}

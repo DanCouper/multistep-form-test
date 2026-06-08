@@ -46,6 +46,7 @@
 :where(img, picture, video, canvas, svg) {
   display: block;
   max-inline-size: 100%;
+  block-size: auto;
 }
 
 /*
@@ -78,25 +79,4 @@
 
 :where(a) {
   color: inherit;
-}
-
-:where(#root) {
-  /* Create a root stacking context */
-  isolation: isolate;
-  /*
-     * Ensure the root element (which houses the application) is at least the 
-     * height of the viewport. This is conistently important.
-     */
-  min-height: 100dvh;
-
-  /*
-     * The app is always going to have a set of landmark elements stacked within the
-     * root element, and the `<main>` element should always expand to fill the available space.
-     */
-  display: flex;
-  flex-direction: column;
-
-  > main {
-    flex: 1;
-  }
 }

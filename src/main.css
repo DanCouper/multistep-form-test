@@ -1,0 +1,84 @@
+@import "./styles/reset.css" layer(reset);
+@import "./styles/base.css" layer(base);
+
+@layer reset, base;
+
+@font-face {
+  font-family: "DM Sans";
+  src: url("./assets/DMSans-VariableFont_opsz,wght.ttf");
+  font-weight: 100 900;
+  font-display: swap;
+  font-style: normal;
+}
+
+:root {
+  /* Color scheme */
+  --c-canvas: #ffffff;
+  --c-canvas-muted: #afafaf;
+  --c-text: #291040;
+  --c-text-light: #291040;
+  --c-accent: #ec7125;
+  --c-warning: #ff2d46;
+
+  --font-family: "DM Sans";
+
+  /* Spacing */
+}
+
+html {
+  background-color: var(--c-canvas);
+  color: var(--c-text);
+  font-family: var(--font-family);
+}
+
+#root {
+  min-height: 100dvh;
+
+  /* banner */
+  > header {
+    display: flex;
+    justify-content: space-between;
+    block-size: 4rem;
+  }
+
+  > footer {
+    border-top: 1px solid var(--c-canvas-muted);
+    display: flex;
+    justify-content: space-between;
+  }
+}
+
+main {
+  > * {
+    max-inline-size: 32rem;
+    margin-inline-start: 1rem;
+    margin-inline-end: 1rem;
+  }
+
+  > header {
+    text-align: center;
+  }
+
+  > form > section {
+    border: 1px solid var(--c-canvas-muted);
+    border-radius: 1rem;
+    padding: 1rem;
+
+    > nav {
+      ol {
+        list-style: none;
+        display: flex;
+        justify-content: center;
+      }
+
+      border-bottom: 1px solid var(--c-canvas-muted);
+    }
+  }
+}
+
+@media screen and (min-width: 42rem) {
+  main > * {
+    margin-inline-start: auto;
+    margin-inline-end: auto;
+  }
+}
