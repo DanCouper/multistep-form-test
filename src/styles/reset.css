@@ -1,0 +1,102 @@
+:where(*, *::before, *::after) {
+    /* Sane standard box sizing everywhere. */
+    box-sizing: border-box;
+}
+
+:where(*) {
+    /* Remove default margins everywhere. */
+    margin: 0;
+    padding: 0;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    :where(html) {
+        /*
+         * Allow keywords in the `interpolate-size` property.
+         * This allows animating between concrete sizes and derived sizes (for example
+         * `auto` or `fit-content`).
+         */
+        interpolate-size: allow-keywords;
+    }
+}
+
+:where(body) {
+    /*
+     * Use an accessible line-height by default, but calculate it based on the
+     * font size so it's tighter for large text (e.g. headings).
+     * @see https://kittygiraudel.com/2020/05/18/using-calc-to-figure-out-optimal-line-height/
+     *
+     * NOTE: this is experimental, so proceed with caution.
+     */
+    line-height: calc(1em + 0.5rem);
+    /*
+     * Improved text rendering, sort of. This is only going to apply on macOS.
+     * macOS uses subpixel antialiasing by default, which is designed to smooth
+     * out pixels. But this was designed to improve rendering on low-resolution
+     * devices, and we now live in a world of high DPI displays. This rule ensures
+     * the rendering just uses standard antialiasing, as per every other platform.
+     */
+    -webkit-font-smoothing: antialiased;
+}
+
+/*
+ * Improve media defaults. The following fits the standard usecase for these
+ * elements - not inline, and filling their container.
+ */
+:where(img, picture, video, canvas, svg) {
+    display: block;
+    max-inline-size: 100%;
+}
+
+/*
+ * Inherit fonts for form controls.
+ */
+:where(input, button, textarea, select) {
+    font: inherit;
+}
+
+/* Avoid text overflows */
+:where(p, h1, h2, h3, h4, h5, h6) {
+    overflow-wrap: break-word;
+}
+
+/* Improve line wrapping. */
+:where(p) {
+    text-wrap: pretty;
+}
+
+:where(h1, h2, h3, h4, h5, h6) {
+    text-wrap: balance;
+}
+
+/* REVIEW: almost always want to remove list styles, hence the default. */
+:where(ul) {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+:where(a) {
+    color: inherit;
+}
+
+:where(#root) {
+    /* Create a root stacking context */
+    isolation: isolate;
+    /*
+     * Ensure the root element (which houses the application) is at least the 
+     * height of the viewport. This is conistently important.
+     */
+    min-height: 100dvh;
+
+    /*
+     * The app is always going to have a set of landmark elements stacked within the
+     * root element, and the `<main>` element should always expand to fill the available space.
+     */
+    display: flex;
+    flex-direction: column;
+
+    >main {
+        flex: 1;
+    }
+}
