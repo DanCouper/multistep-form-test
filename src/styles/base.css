@@ -110,7 +110,7 @@ h3 {
   &:focus {
     border-color: var(--c-text);
   }
-  &:invalid {
+  &:user-invalid {
     border-color: var(--c-warning);
     box-shadow: 0px 5px 10px 0px hsl(from var(--c-warning) h s l / 0.25);
   }
@@ -240,7 +240,7 @@ form-step:not([active]) {
     font-size: var(--fs-xs);
   }
 
-  input:invalid + p {
+  input:user-invalid + p {
     color: var(--c-warning);
   }
 
