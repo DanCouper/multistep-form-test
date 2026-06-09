@@ -18,6 +18,9 @@
     "test:browser": "vitest --project e2e",
     "test:browser:once": "vitest run --project e2e"
   },
+  "dependencies": {
+    "@ungap/custom-elements": "^1.3.0"
+  },
   "devDependencies": {
     "@types/node": "^25.9.2",
     "@typescript/native-preview": "^7.0.0-dev.20260605.1",

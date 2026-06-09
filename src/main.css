@@ -1,7 +1,7 @@
 @import "./styles/reset.css" layer(reset);
 @import "./styles/base.css" layer(base);
-
-@layer reset, base;
+@import "./styles/util.css" layer(util);
+@layer reset, util, base;
 
 @font-face {
   font-family: "DM Sans";
@@ -16,11 +16,20 @@
   --c-canvas: #ffffff;
   --c-canvas-muted: #afafaf;
   --c-text: #291040;
-  --c-text-light: #291040;
+  --c-text-light: hsl(from #291040 h calc(s - 10) calc(l + 5));
   --c-accent: #ec7125;
   --c-warning: #ff2d46;
 
   --font-family: "DM Sans";
+
+  /* Font size scale. The px values are nominal at a 16px base; they're expressed
+     in rem so the whole scale tracks the fluid root font-size set on <html>. */
+  --fs-xs: 0.75rem; /* 12 */
+  --fs-s: 0.875rem; /* 14 */
+  --fs-base: 1rem; /* 16 */
+  --fs-lg: 1.125rem; /* 18 */
+  --fs-xl: 1.5rem; /* 24 */
+  --fs-xxl: 2rem; /* 32 */
 
   /* Spacing */
 }
@@ -31,54 +40,14 @@ html {
   font-family: var(--font-family);
 }
 
-#root {
-  min-height: 100dvh;
-
-  /* banner */
-  > header {
-    display: flex;
-    justify-content: space-between;
-    block-size: 4rem;
-  }
-
-  > footer {
-    border-top: 1px solid var(--c-canvas-muted);
-    display: flex;
-    justify-content: space-between;
-  }
+[data-button-variant="primary"] {
+  --btn-canvas: var(--c-accent);
+  --btn-canvas-text: var(--c-canvas);
+  --btn-border-color: transparent;
 }
 
-main {
-  > * {
-    max-inline-size: 32rem;
-    margin-inline-start: 1rem;
-    margin-inline-end: 1rem;
-  }
-
-  > header {
-    text-align: center;
-  }
-
-  > form > section {
-    border: 1px solid var(--c-canvas-muted);
-    border-radius: 1rem;
-    padding: 1rem;
-
-    > nav {
-      ol {
-        list-style: none;
-        display: flex;
-        justify-content: center;
-      }
-
-      border-bottom: 1px solid var(--c-canvas-muted);
-    }
-  }
-}
-
-@media screen and (min-width: 42rem) {
-  main > * {
-    margin-inline-start: auto;
-    margin-inline-end: auto;
-  }
+[data-button-variant="secondary"] {
+  --btn-canvas: transparent;
+  --btn-canvas-text: var(--c-accent);
+  --btn-border-color: var(--c-accent);
 }

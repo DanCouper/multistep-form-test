@@ -1,0 +1,22 @@
+/**
+ * REVIEW: make visible when tabbing so keyboard user can see when tabbing.
+ * However, this is going to mess some things up layout-wise so need to refine.
+ */
+.visually-hidden:not(:focus):not(:active) {
+  border: 0;
+  clip-path: inset(50%);
+  height: 1px;
+  margin: 0;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+}
+
+/* Hayden Pickering's `grid` from Every Layout */
+.auto-grid {
+  align-items: start;
+  display: grid;
+  grid-gap: var(--g-gap, 1rem);
+  grid-template-columns: repeat(auto-fill, minmax(min(var(--g-min, 20ch), 100%), 1fr));
+}

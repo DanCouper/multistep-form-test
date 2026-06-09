@@ -1,41 +1,46 @@
-:where(*, *::before, *::after) {
-  /* Sane standard box sizing everywhere. */
+/* Sane standard box sizing everywhere. */
+*,
+*::before,
+*::after {
   box-sizing: border-box;
 }
 
-:where(*) {
-  /* Remove default margins everywhere. */
+/* Remove default margins everywhere except dialogs (they need to be centred on page) */
+*:not(dialog) {
   margin: 0;
-  padding: 0;
 }
 
+/* Allow keywords in the `interpolate-size` property.
+ * This allows animating between concrete sizes and derived sizes (for example
+ * `auto` or `fit-content`).
+ */
 @media (prefers-reduced-motion: no-preference) {
-  :where(html) {
-    /*
-         * Allow keywords in the `interpolate-size` property.
-         * This allows animating between concrete sizes and derived sizes (for example
-         * `auto` or `fit-content`).
-         */
+  html {
     interpolate-size: allow-keywords;
   }
 }
 
-:where(body) {
-  /*
-     * Use an accessible line-height by default, but calculate it based on the
-     * font size so it's tighter for large text (e.g. headings).
-     * @see https://kittygiraudel.com/2020/05/18/using-calc-to-figure-out-optimal-line-height/
-     *
-     * NOTE: this is experimental, so proceed with caution.
-     */
+html {
+  font-size: clamp(1em, 17px + 0.24vw, 1.25em);
+}
+
+/* Use an accessible line-height by default, but calculate it based on the
+ * font size so it's tighter for large text (e.g. headings).
+ * @see https://kittygiraudel.com/2020/05/18/using-calc-to-figure-out-optimal-line-height/
+ *
+ * NOTE: this is experimental, so proceed with caution.
+ */
+* {
   line-height: calc(1em + 0.5rem);
-  /*
-     * Improved text rendering, sort of. This is only going to apply on macOS.
-     * macOS uses subpixel antialiasing by default, which is designed to smooth
-     * out pixels. But this was designed to improve rendering on low-resolution
-     * devices, and we now live in a world of high DPI displays. This rule ensures
-     * the rendering just uses standard antialiasing, as per every other platform.
-     */
+}
+
+/* Improved text rendering, sort of. This is only going to apply on macOS.
+ * macOS uses subpixel antialiasing by default, which is designed to smooth
+ * out pixels. But this was designed to improve rendering on low-resolution
+ * devices, and we now live in a world of high DPI displays. This rule ensures
+ * the rendering just uses standard antialiasing, as per every other platform.
+ */
+body {
   -webkit-font-smoothing: antialiased;
 }
 
@@ -43,40 +48,60 @@
  * Improve media defaults. The following fits the standard usecase for these
  * elements - not inline, and filling their container.
  */
-:where(img, picture, video, canvas, svg) {
+img,
+picture,
+video,
+canvas,
+svg {
   display: block;
   max-inline-size: 100%;
   block-size: auto;
 }
 
-/*
- * Inherit fonts for form controls.
- */
-:where(input, button, textarea, select) {
+/* Inherit fonts for form controls.  */
+input,
+button,
+textarea,
+select {
   font: inherit;
 }
 
 /* Avoid text overflows */
-:where(p, h1, h2, h3, h4, h5, h6) {
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   overflow-wrap: break-word;
 }
 
-/* Improve line wrapping. */
-:where(p) {
+/* Improve line wrapping... */
+p {
   text-wrap: pretty;
 }
 
-:where(h1, h2, h3, h4, h5, h6) {
+/* ...but balance it for headings. */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   text-wrap: balance;
 }
 
-/* REVIEW: almost always want to remove list styles, hence the default. */
-:where(ul) {
-  list-style: none;
-  padding: 0;
-  margin: 0;
+/* IMPORTANT: create a stacking context for the app root which is almost always going to be an element nested within <body> */
+#root {
+  isolation: isolate;
 }
 
-:where(a) {
-  color: inherit;
+/* IMPORTANT: add app custom elements here: browser doesn't know about them yet,
+ * so they need the correct display value set.
+ */
+multistep-form,
+form-step,
+form-field {
+  display: block;
 }
